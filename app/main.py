@@ -42,7 +42,6 @@ app.include_router(query_router)
 app.include_router(history_router)
 app.include_router(analytics_router)
 app.include_router(explain_router)
-app.include_router(test_router)
 app.include_router(
     saved_queries_router
 )
