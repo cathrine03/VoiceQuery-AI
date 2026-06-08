@@ -1,6 +1,6 @@
 from sqlalchemy import text
 
-from backend.app.db.session import SessionLocal
+from app.db.session import SessionLocal
 
 
 def execute_query(sql: str):

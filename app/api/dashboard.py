@@ -2,13 +2,13 @@ from fastapi import APIRouter, Depends
 from sqlalchemy import func
 from datetime import datetime, timedelta
 
-from backend.app.auth.dependencies import (
+from app.auth.dependencies import (
     get_current_user
 )
 
-from backend.app.db.session import SessionLocal
-from backend.app.db.models.query_history import QueryHistory
-from backend.app.db.models.saved_query import SavedQuery
+from app.db.session import SessionLocal
+from app.db.models.query_history import QueryHistory
+from app.db.models.saved_query import SavedQuery
 
 router = APIRouter(
     prefix="/dashboard",

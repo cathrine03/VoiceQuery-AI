@@ -2,14 +2,14 @@ from fastapi import APIRouter
 from sqlalchemy import func
 from sqlalchemy import func
 
-from backend.app.db.session import SessionLocal
-from backend.app.db.models.query_history import QueryHistory
-from backend.app.db.models.user import User
+from app.db.session import SessionLocal
+from app.db.models.query_history import QueryHistory
+from app.db.models.user import User
 
-from backend.app.auth.rbac import require_role
+from app.auth.rbac import require_role
 from fastapi import Depends
 
-from backend.app.auth.rbac import (
+from app.auth.rbac import (
     require_role
 )
 

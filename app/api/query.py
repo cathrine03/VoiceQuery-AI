@@ -1,13 +1,13 @@
 from fastapi import APIRouter,Depends
 import time
 
-from backend.app.services.sql_generator import generate_sql
-from backend.app.services.query_executor import execute_query
-from backend.app.services.sql_validator import validate_sql
+from app.services.sql_generator import generate_sql
+from app.services.query_executor import execute_query
+from app.services.sql_validator import validate_sql
 
-from backend.app.db.session import SessionLocal
-from backend.app.db.models.query_history import QueryHistory
-from backend.app.auth.dependencies import (
+from app.db.session import SessionLocal
+from app.db.models.query_history import QueryHistory
+from app.auth.dependencies import (
     get_current_user)
 
 router = APIRouter(

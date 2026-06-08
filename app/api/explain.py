@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from backend.app.services.sql_explainer import (
+from app.services.sql_explainer import (
     explain_sql,
 )
 

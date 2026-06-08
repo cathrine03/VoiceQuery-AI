@@ -1,7 +1,7 @@
 from fastapi import Depends
 from fastapi import HTTPException
 
-from backend.app.auth.dependencies import (
+from app.auth.dependencies import (
     get_current_user
 )
 

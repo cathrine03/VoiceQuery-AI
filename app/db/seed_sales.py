@@ -1,8 +1,8 @@
 from datetime import date
 from random import choice, randint
 
-from backend.app.db.session import SessionLocal
-from backend.app.db.models.sales import Sale
+from app.db.session import SessionLocal
+from app.db.models.sales import Sale
 
 db = SessionLocal()
 
