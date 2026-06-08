@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
-from backend.app.auth.dependencies import get_current_user
-from backend.app.db.session import SessionLocal
-from backend.app.db.models.saved_query import SavedQuery
+from app.auth.dependencies import get_current_user
+from app.db.session import SessionLocal
+from app.db.models.saved_query import SavedQuery
 
 router = APIRouter(prefix="/saved-queries", tags=["Saved Queries"])
 
