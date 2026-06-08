@@ -5,21 +5,21 @@ from app.db.dependencies import get_db
 from app.db.models.user import User
 
 
-from backend.app.auth.password import (
+from app.auth.password import (
     hash_password,
     verify_password
 )
 
-from backend.app.auth.jwt_handler import (
+from app.auth.jwt_handler import (
     create_access_token
 )
 
-from backend.app.db.schemas.user import (
+from app.db.schemas.user import (
     UserCreate,
     UserLogin
 )
 
-from backend.app.auth.dependencies import (
+from app.auth.dependencies import (
     get_current_user
 )
 
