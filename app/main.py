@@ -1,21 +1,21 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from backend.app.api.analytics import (router as analytics_router)
+from app.api.analytics import (router as analytics_router)
 
-from backend.app.api.routes.auth import router as auth_router
-from backend.app.api.dashboard import (
+from app.api.routes.auth import router as auth_router
+from app.api.dashboard import (
     router as dashboard_router
 )
-from backend.app.api.query import router as query_router
-from backend.app.api.history import router as history_router
-from backend.app.api.explain import (
+from app.api.query import router as query_router
+from app.api.history import router as history_router
+from app.api.explain import (
     router as explain_router
 )
 from test import (
     router as test_router
 )
-from backend.app.routes.users import router as users_router
-from backend.app.routes.saved_queries import (
+from app.routes.users import router as users_router
+from app.routes.saved_queries import (
     router as saved_queries_router
 )
 
