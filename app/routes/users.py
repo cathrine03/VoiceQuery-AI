@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException
-from backend.app.auth.dependencies import (
+from app.auth.dependencies import (
     get_current_user
 )
 
-from backend.app.db.session import SessionLocal
-from backend.app.db.models.user import User
+from app.db.session import SessionLocal
+from app.db.models.user import User
 
 router = APIRouter(
     prefix="/users",
