@@ -7,7 +7,7 @@ from sqlalchemy import (
 
 from datetime import datetime
 
-from backend.app.db.base import Base
+from app.db.base import Base
 
 
 class SavedQuery(Base):
