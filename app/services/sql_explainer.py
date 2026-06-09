@@ -13,6 +13,7 @@ Keep the explanation:
 """
 
 def explain_sql(sql: str):
+    
     response = client.chat.completions.create(
         model="llama-3.3-70b-versatile",
         messages=[
@@ -28,4 +29,9 @@ def explain_sql(sql: str):
         temperature=0,
     )
 
+    if not sql or not sql.strip():
+        return {"explanation": "No SQL generated yet."}
+
     return response.choices[0].message.content
+
+    
