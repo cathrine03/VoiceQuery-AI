@@ -1,31 +1,32 @@
-from app.services.llm_client import client
+import os
+from groq import Groq
 
-EXPLAIN_PROMPT = """
-You are a data analyst.
+client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
-Explain the SQL query in simple business language.
-
-Keep the explanation:
-- Short
-- Clear
-- Non-technical
-- Maximum 3 sentences
-"""
 
 def explain_sql(sql: str):
+
+    prompt = f"""
+Explain this SQL query in simple terms:
+
+SQL:
+{sql}
+
+Rules:
+- Simple explanation
+- No SQL rewriting
+- No extra formatting
+"""
+
     response = client.chat.completions.create(
-        model="llama-3.3-70b-versatile",
+        model="llama-3.1-8b-instant",
         messages=[
-            {
-                "role": "system",
-                "content": EXPLAIN_PROMPT,
-            },
-            {
-                "role": "user",
-                "content": sql,
-            },
+            {"role": "system", "content": "You explain SQL clearly."},
+            {"role": "user", "content": prompt}
         ],
-        temperature=0,
+        temperature=0
     )
 
-    return response.choices[0].message.content
+    return {
+        "explanation": response.choices[0].message.content.strip()
+    }
