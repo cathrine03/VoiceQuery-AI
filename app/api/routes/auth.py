@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException
+import traceback
 from sqlalchemy.orm import Session
 
 from app.db.dependencies import get_db
@@ -29,38 +30,38 @@ router = APIRouter(
     tags=["Authentication"]
 )
 
+@router.get("/debug-env")
+def debug():
+    return {"db": DATABASE_URL}
+
+
+
 @router.post("/register")
-def register_user(
-    user: UserCreate,
-    db: Session = Depends(get_db)
-):
+def register_user(user: UserCreate, db: Session = Depends(get_db)):
+    try:
+        existing_user = db.query(User).filter(User.email == user.email).first()
 
-    existing_user = db.query(User).filter(
-        User.email == user.email
-    ).first()
+        if existing_user:
+            return {"error": "exists"}
 
-    if existing_user:
-        raise HTTPException(
-            status_code=400,
-            detail="Email already exists"
+        new_user = User(
+            username=user.username,
+            email=user.email,
+            hashed_password=hash_password(user.password),
+            role="user"
         )
 
-    new_user = User(
-        username=user.username,
-        email=user.email,
-        hashed_password=hash_password(
-            user.password
-        ),
-        role="user"
-    )
+        db.add(new_user)
+        db.commit()
 
-    db.add(new_user)
-    db.commit()
+        return {"message": "User created successfully"}
 
-    return {
-        "message": "User created successfully"
-    }
-
+    except Exception as e:
+        print("🔥 REGISTER ERROR:", str(e))
+        print(traceback.format_exc())
+        raise HTTPException(status_code=500, detail=str(e))
+    
+    
 @router.post("/login")
 def login_user(
     user: UserLogin,

@@ -14,15 +14,10 @@ def get_current_user(
 
     print("TOKEN =", repr(token))
 
-    payload = verify_token(token)
-
-    print("PAYLOAD =", payload)
-
-    if not payload:
-        raise HTTPException(
-            status_code=401,
-            detail="Invalid token"
-        )
+    try:
+        payload = verify_token(token)
+    except Exception as e:
+        raise HTTPException(status_code=401, detail="Invalid token")
 
     return payload
 

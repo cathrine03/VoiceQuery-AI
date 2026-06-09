@@ -5,8 +5,12 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+
 SECRET_KEY = os.getenv("SECRET_KEY")
-ALGORITHM = "HS256"
+ALGORITHM = os.getenv("ALGORITHM", "HS256")
+
+if not SECRET_KEY:
+    raise Exception("SECRET_KEY is missing in environment variables")
 
 def create_access_token(data: dict):
     to_encode = data.copy()
