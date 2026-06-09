@@ -16,7 +16,9 @@ def get_current_user(
 
     try:
         payload = verify_token(token)
+        print("PAYLOAD =", payload)
     except Exception as e:
+        print("JWT ERROR =", e)
         raise HTTPException(status_code=401, detail="Invalid token")
 
     return payload
