@@ -35,6 +35,11 @@ def debug():
     return {"db": DATABASE_URL}
 
 
+@router.get("/whoami-db")
+def whoami(db: Session = Depends(get_db)):
+    result = db.execute("SELECT current_database();").fetchone()
+    return {"database": str(result)}
+
 
 @router.post("/register")
 def register_user(user: UserCreate, db: Session = Depends(get_db)):
