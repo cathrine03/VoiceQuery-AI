@@ -33,7 +33,7 @@ def generate_query(
 
     sql = generate_sql(question)
 
-    
+
     
 
     total_start = time.time()
@@ -91,3 +91,5 @@ def generate_query(
             "total_ms": total_ms
         }
     }
+
+    
