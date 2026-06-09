@@ -50,6 +50,9 @@ def generate_sql(question: str):
         temperature=0,
     )
 
+    if not question or not question.strip():
+        return "SELECT 1;"
+
     raw = response.choices[0].message.content
 
     return clean_sql(raw)
