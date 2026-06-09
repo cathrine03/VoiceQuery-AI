@@ -1,4 +1,4 @@
-from ollama import chat
+from app.services.llm_client import client
 
 EXPLAIN_PROMPT = """
 You are a data analyst.
@@ -13,8 +13,8 @@ Keep the explanation:
 """
 
 def explain_sql(sql: str):
-    response = chat(
-        model="qwen2.5:3b",
+    response = client.chat.completions.create(
+        model="llama-3.3-70b-versatile",
         messages=[
             {
                 "role": "system",
@@ -25,10 +25,7 @@ def explain_sql(sql: str):
                 "content": sql,
             },
         ],
-        options={
-            "temperature": 0,
-            "num_predict": 120,
-        },
+        temperature=0,
     )
 
-    return response["message"]["content"]
+    return response.choices[0].message.content

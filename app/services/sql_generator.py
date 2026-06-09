@@ -1,28 +1,50 @@
-import os
-from dotenv import load_dotenv
-from groq import Groq
+import re
+from app.services.llm_client import client
 
-load_dotenv()
+SYSTEM_PROMPT = """
+You are a PostgreSQL SQL generator.
 
-client = Groq(
-    api_key=os.getenv("GROQ_API_KEY")
+Database schema:
+
+sales(
+    id,
+    region,
+    product,
+    revenue,
+    sale_date
 )
 
-def generate_sql(question: str):
+Rules:
+1. Return ONLY executable SQL.
+2. Return exactly one SQL query.
+3. Do not explain.
+4. Do not think.
+5. Do not output analysis.
+6. Do not use markdown.
+7. Do not use backticks.
+8. SELECT statements only.
+"""
 
+def clean_sql(text: str):
+    text = re.sub(r"<think>.*?</think>", "", text, flags=re.DOTALL)
+    text = text.replace("```sql", "")
+    text = text.replace("```", "")
+    return text.strip()
+
+def generate_sql(question: str):
     response = client.chat.completions.create(
         model="llama-3.3-70b-versatile",
         messages=[
             {
                 "role": "system",
-                "content": SYSTEM_PROMPT
+                "content": SYSTEM_PROMPT,
             },
             {
                 "role": "user",
-                "content": question
-            }
+                "content": question,
+            },
         ],
-        temperature=0
+        temperature=0,
     )
 
     raw = response.choices[0].message.content
