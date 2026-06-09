@@ -31,9 +31,35 @@ router = APIRouter(
     tags=["Authentication"]
 )
 
-@router.get("/debug-env")
-def debug():
-    return {"db": DATABASE_URL}
+
+@router.get("/db-debug")
+def db_debug(db: Session = Depends(get_db)):
+    db_name = db.execute(
+        text("SELECT current_database()")
+    ).fetchone()
+
+    schema = db.execute(
+        text("SELECT current_schema()")
+    ).fetchone()
+
+    search_path = db.execute(
+        text("SHOW search_path")
+    ).fetchone()
+
+    tables = db.execute(
+        text("""
+        SELECT schemaname, tablename
+        FROM pg_tables
+        ORDER BY schemaname, tablename
+        """)
+    ).fetchall()
+
+    return {
+        "database": str(db_name),
+        "schema": str(schema),
+        "search_path": str(search_path),
+        "tables": [str(t) for t in tables]
+    }
 
 
 @router.get("/whoami-db")
