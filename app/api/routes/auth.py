@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 import traceback
 from sqlalchemy.orm import Session
+from sqlalchemy import text
 
 from app.db.dependencies import get_db
 from app.db.models.user import User
@@ -37,8 +38,8 @@ def debug():
 
 @router.get("/whoami-db")
 def whoami(db: Session = Depends(get_db)):
-    result = db.execute("SELECT current_database();").fetchone()
-    return {"database": str(result)}
+    result = db.execute(text("SELECT current_database();")).fetchone()
+    return {"database": result[0]}
 
 
 @router.post("/register")
