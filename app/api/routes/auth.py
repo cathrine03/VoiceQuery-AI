@@ -79,6 +79,22 @@ def login_user(
     print("LOGIN HIT")
     print("EMAIL =", user.email)
 
+    db_name = db.execute(
+        text("SELECT current_database();")
+    ).fetchone()
+
+    print("DB =", db_name)
+
+    tables = db.execute(
+        text("""
+        SELECT table_name
+        FROM information_schema.tables
+        WHERE table_schema='public'
+        """)
+    ).fetchall()
+
+    print("TABLES =", tables)
+
     db_user = db.query(User).filter(
         User.email == user.email
     ).first()
