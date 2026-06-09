@@ -60,6 +60,9 @@ def register_user(user: UserCreate, db: Session = Depends(get_db)):
         db.add(new_user)
         db.commit()
 
+        print("REGISTER HIT")
+        print(user.email)
+
         return {"message": "User created successfully"}
 
     except Exception as e:
@@ -73,10 +76,14 @@ def login_user(
     user: UserLogin,
     db: Session = Depends(get_db)
 ):
+    print("LOGIN HIT")
+    print("EMAIL =", user.email)
 
     db_user = db.query(User).filter(
         User.email == user.email
     ).first()
+
+    print("DB_USER =", db_user)
 
     if not db_user:
         raise HTTPException(
