@@ -1,6 +1,7 @@
 import re
 from app.services.llm_client import client
 
+
 SYSTEM_PROMPT = """
 You are a PostgreSQL SQL generator.
 
@@ -32,6 +33,8 @@ def clean_sql(text: str):
     return text.strip()
 
 def generate_sql(question: str):
+    if not question or not question.strip():
+        raise ValueError("Empty question received")
     response = client.chat.completions.create(
         model="llama-3.3-70b-versatile",
         messages=[

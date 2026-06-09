@@ -1,4 +1,4 @@
-from fastapi import APIRouter,Depends
+from fastapi import APIRouter,Depends,HTTPException
 import time
 
 from app.services.sql_generator import generate_sql
@@ -9,6 +9,7 @@ from app.db.session import SessionLocal
 from app.db.models.query_history import QueryHistory
 from app.auth.dependencies import (
     get_current_user)
+from app.db.schemas.query import QueryRequest
 
 router = APIRouter(
     prefix="/query",
@@ -19,10 +20,21 @@ router = APIRouter(
 
 @router.post("/generate")
 def generate_query(
-    payload: dict,
+    payload: QueryRequest,
     user=Depends(get_current_user)
 ):
-    question = payload.get("question")
+    question = payload.question
+
+    if not question or not question.strip():
+        raise HTTPException(
+            status_code=400,
+            detail="Question cannot be empty"
+        )
+
+    sql = generate_sql(question)
+
+    
+    
 
     total_start = time.time()
 
