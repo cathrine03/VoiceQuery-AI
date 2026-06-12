@@ -11,6 +11,7 @@ from app.api.history import router as history_router
 from app.api.explain import (
     router as explain_router
 )
+from app.api.insights import router as insights_router
 
 from app.routes.users import router as users_router
 from app.routes.saved_queries import (
@@ -46,6 +47,7 @@ app.include_router(query_router)
 app.include_router(history_router)
 app.include_router(analytics_router)
 app.include_router(explain_router)
+app.include_router(insights_router)
 app.include_router(
     saved_queries_router
 )
