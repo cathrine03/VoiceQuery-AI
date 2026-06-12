@@ -10,7 +10,7 @@ from app.db.models.query_history import QueryHistory
 from app.auth.dependencies import (
     get_current_user)
 from app.db.schemas.query import QueryRequest
-from backend.app.services.ai_insights import generate_insights
+from app.services.ai_insights import generate_insights
 
 
 

@@ -1,4 +1,4 @@
-from backend.app.core.groq_client import client
+from app.core.groq_client import client
 
 INSIGHT_PROMPT = """
 You are a senior data analyst.
