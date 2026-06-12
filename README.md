@@ -6,7 +6,8 @@ The system is designed to simplify data access for non-technical users while mai
 
 ---
 
-# LINKS:
+# Links
+
 Backend - https://voicequery-ai.onrender.com/docs/
 Frontend - https://voice-query-frontend.vercel.app/
 
