@@ -1,14 +1,15 @@
 # VoiceQuery AI
 
-# LINKS:
-Backend - https://voicequery-ai.onrender.com/docs/
-Frontend - https://voice-query-frontend.vercel.app/
-
 VoiceQuery AI is a full-stack AI-powered analytics platform that converts natural language and voice inputs into SQL queries, executes them on a PostgreSQL database, and returns structured results with visualizations and AI-generated insights.
 
 The system is designed to simplify data access for non-technical users while maintaining flexibility for advanced analytics workflows.
 
 ---
+
+# LINKS:
+Backend - https://voicequery-ai.onrender.com/docs/
+Frontend - https://voice-query-frontend.vercel.app/
+
 
 ## Features
 
